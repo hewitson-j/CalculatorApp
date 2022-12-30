@@ -1,12 +1,3 @@
-// console.log("Hello world");
-
-class Calculator {
-  constructor(previousOperandText, currentOperandText) {
-    this.previousOperandText = previousOperandText;
-    this.currentOperandText = currentOperandText;
-  }
-}
-
 const numberButtons = document.querySelectorAll("[data-number]");
 const operationButtons = document.querySelectorAll("[data-operations]");
 const equalsButton = document.querySelectorAll("[data-equals]");
@@ -20,7 +11,7 @@ const currentOperand = document.querySelector("#currentOperand");
 const previousOperand = document.querySelector("#previousOperand");
 const testText = document.querySelector("#test-text");
 
-// const calculator = new Calculator(previousOperandText, currentOperandText);
+//Number Buttons and functions
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
     if (
@@ -40,6 +31,7 @@ numberButtons.forEach((button) => {
   });
 });
 
+//Delete button and function
 deleteButton.forEach((button) => {
   button.addEventListener("click", () => {
     const newOperand = currentOperand.textContent.substring(
@@ -53,9 +45,147 @@ deleteButton.forEach((button) => {
   });
 });
 
+//All Clear button and funtion
 allClearButton.forEach((button) => {
   button.addEventListener("click", () => {
     previousOperand.textContent = "";
     currentOperand.textContent = "0";
+  });
+});
+
+//Operations Buttons and function
+operationButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    //If current operand ends in decimal, adds a zero to avoid errors
+    if (
+      currentOperand.textContent.charAt(
+        currentOperand.textContent.length - 1
+      ) === "."
+    ) {
+      currentOperand.textContent = currentOperand.textContent + "0";
+    }
+
+    //If no value to operate against, adds this value as first operator and clears current for input of second operator
+    if (previousOperand.textContent === "") {
+      const newPreviousOperand =
+        currentOperand.textContent + " " + button.textContent;
+      previousOperand.textContent = newPreviousOperand;
+      currentOperand.textContent = "0";
+      return;
+    }
+    //If there is already an operator to add against, it performs the function with the currently input operator
+    else {
+      const previousOperandValue = previousOperand.textContent.substring(
+        0,
+        previousOperand.textContent.length - 2
+      );
+
+      const operationCharacter = previousOperand.textContent.charAt(
+        previousOperand.textContent.length - 1
+      );
+
+      switch (operationCharacter) {
+        case "+":
+          var preOperand = parseFloat(previousOperandValue);
+          var curOperand = parseFloat(currentOperand.textContent);
+
+          var value = preOperand + curOperand;
+
+          previousOperand.textContent = "";
+          currentOperand.textContent = value.toString();
+          break;
+        case "-":
+          var preOperand = parseFloat(previousOperandValue);
+          var curOperand = parseFloat(currentOperand.textContent);
+
+          var value = preOperand - curOperand;
+
+          previousOperand.textContent = "";
+          currentOperand.textContent = value.toString();
+          break;
+        case "*":
+          var preOperand = parseFloat(previousOperandValue);
+          var curOperand = parseFloat(currentOperand.textContent);
+
+          var value = preOperand * curOperand;
+
+          previousOperand.textContent = "";
+          currentOperand.textContent = value.toString();
+          break;
+        case "÷":
+          var preOperand = parseFloat(previousOperandValue);
+          var curOperand = parseFloat(currentOperand.textContent);
+
+          var value = preOperand / curOperand;
+
+          previousOperand.textContent = "";
+          currentOperand.textContent = value.toString();
+          break;
+      }
+    }
+  });
+});
+
+//Equals Button and functions
+equalsButton.forEach((button) => {
+  button.addEventListener("click", () => {
+    //If no value to operate against, the calculator returns and does nothing.
+    if (previousOperand.textContent === "") {
+      return;
+    }
+
+    var previous = previousOperand.textContent.substring(
+      0,
+      previousOperand.textContent.length - 2
+    );
+    var current = currentOperand.textContent;
+    const operationCharacter = previousOperand.textContent.charAt(
+      previousOperand.textContent.length - 1
+    );
+
+    //If current operand ends in decimal, adds a zero to avoid errors
+    if (current.charAt(current.length - 1) === ".") {
+      current = current + "0";
+    }
+
+    //Performs operation based on operation character
+    switch (operationCharacter) {
+      case "+":
+        var previousNum = parseFloat(previous);
+        var currentNum = parseFloat(current);
+
+        var value = previousNum + currentNum;
+
+        previousOperand.textContent = "";
+        currentOperand.textContent = value.toString();
+        break;
+      case "-":
+        var previousNum = parseFloat(previous);
+        var currentNum = parseFloat(current);
+
+        var value = previousNum - currentNum;
+
+        previousOperand.textContent = "";
+        currentOperand.textContent = value.toString();
+        break;
+      case "*":
+        var previousNum = parseFloat(previous);
+        var currentNum = parseFloat(current);
+
+        var value = previousNum * currentNum;
+
+        previousOperand.textContent = "";
+        currentOperand.textContent = value.toString();
+        break;
+      case "÷":
+        var previousNum = parseFloat(previous);
+        var currentNum = parseFloat(current);
+
+        var value = previousNum / currentNum;
+
+        previousOperand.textContent = "";
+        currentOperand.textContent = value.toString();
+        break;
+    }
   });
 });
