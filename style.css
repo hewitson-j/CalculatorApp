@@ -28,9 +28,9 @@
         background-color: rbga(255, 255, 255, 0.75);
       }
   
-        .calculator-grid > button:hover {
-          background-color: #a9a9a9;
-        }
+  .calculator-grid > button:hover {
+    background-color: #a9a9a9;
+  }
   
   .span-two {
     grid-column: span 2;
@@ -43,7 +43,7 @@
     background-color: rgba(0, 0, 0, 0.85);
     display: flex;
     align-items: flex-end;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: column;
     padding: 10px;
     word-wrap: break-word;

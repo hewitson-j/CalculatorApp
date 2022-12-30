@@ -1,14 +1,19 @@
+<!DOCTYPE html>
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="Jacob Hewitson">
     <meta name="description" content="Calculator App">
     <title>Calculator App</title>
-    <link href="/style.css" rel="stylesheet">
-    <script src="/script.js" defer></script>
+    <link href="style.css" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- <p id="test-text">Hello</p> -->
     <div class="calculator-grid">
         <div class="output">
-            <div data-previous-operand class="previous-operand"></div>
-            <div data-current-operand class="current-operand">0</div>
+            <div id="previousOperand" data-previous-operand class="previous-operand"></div>
+            <div id="currentOperand" data-current-operand class="current-operand">0</div>
         </div>
         <button data-all-clear class="span-two">AC</button>
         <button data-delete>DEL</button>
@@ -29,6 +34,5 @@
         <button data-number>0</button>
         <button data-equals class="span-two">=</button>
     </div>
-</head>
-<body>
 </body>
+</html>
